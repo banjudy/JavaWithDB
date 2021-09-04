@@ -17,12 +17,12 @@ public class Main {
         //System.out.println(System.getenv("DB_USER"));
         //System.out.println(System.getenv("DB_PASSWORD"));
 
-        List<Dragon> myDragons;
-
-        myDragons = engine.listAllDragons();
-
-        for (Dragon dragon:myDragons) {
+        if (engine.isConnected()) {
+            Dragon dragon = engine.findDragonByName("'my dragon'");
+            System.out.println(dragon);
+        } else {
             System.out.println("no connection");
         }
+
     }
 }

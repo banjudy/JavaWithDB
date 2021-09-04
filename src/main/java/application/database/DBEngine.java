@@ -36,6 +36,33 @@ public class DBEngine {
         }
     }
 
+    public Dragon findDragonByName(String searchName) {
+        String query = "SELECT * FROM dragon WHERE unique_name = ?";
+
+        Dragon result = null;
+
+        try {
+            //Statement statement = connection.createStatement();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, searchName);
+            ResultSet resultSet = ps.executeQuery(query);
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");   //adatbazisban szerepli mezo neve kerul ide, ill. ugyanez resultSet.getLong(1);
+                String name = resultSet.getString("unique_name");
+                String text = resultSet.getString("dragon_text");
+                String rarityFromDB = resultSet.getString("rarity");    //Rarity rarity = Rarity.valuOf(rarityFromDB.toUpperCas());
+                Rarity rarity = Rarity.find(rarityFromDB);
+
+                result = new  Dragon(id, name, text, rarity);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     //utasítás, ami visszaad minden sárkányt a DB-ből
 
     public List<Dragon> listAllDragons(){
