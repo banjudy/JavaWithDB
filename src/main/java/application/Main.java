@@ -18,8 +18,12 @@ public class Main {
         //System.out.println(System.getenv("DB_PASSWORD"));
 
         if (engine.isConnected()) {
-            Dragon dragon = engine.findDragonByName("'my dragon'");
-            System.out.println(dragon);
+            List<Dragon> dragons = engine.listAllDragons();
+
+            for (Dragon dragon : dragons) {
+                System.out.println(dragon);
+            }
+
         } else {
             System.out.println("no connection");
         }

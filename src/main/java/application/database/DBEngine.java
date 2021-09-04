@@ -1,6 +1,7 @@
 package application.database;
 
 import application.models.Dragon;
+import application.models.Element;
 import application.models.Rarity;
 
 import javax.xml.transform.Result;
@@ -82,7 +83,7 @@ public class DBEngine {
                 Rarity rarity = Rarity.find(rarityFromDB);
 
                 Dragon dragon = new Dragon(id, name, text, rarity);
-
+                dragon.setElements(findDragonsElement(id));
                 dragons.add(dragon);
             }
 
@@ -90,6 +91,48 @@ public class DBEngine {
             e.printStackTrace();
         }
         return dragons;
+    }
+
+    public Element findElementByName(String name) {
+        String query = "SELECT * FROM element WHERE element_name = ?";
+
+        Element element = null;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                String elementName = resultSet.getString("element_name");
+
+                element = new Element(elementName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return element;
+    }
+
+    public List<Element> findDragonsElement(long dragonID) {
+        String query = "SELECT * FROM dragons_element WHERE dragon_id = ?";
+
+        List<Element> elements = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setLong(1, dragonID);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                String elementName = resultSet.getString("element_name");
+                Element element = findElementByName(elementName);
+                elements.add(element);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return elements;
     }
 
 

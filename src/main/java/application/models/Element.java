@@ -5,13 +5,11 @@ public class Element {
     private String name;
     private byte[] icon_img;
 
-
     public Element() {
     }
 
-    public Element(String name, byte[] icon_img) {
+    public Element(String name) {
         this.name = name;
-        this.icon_img = icon_img;
     }
 
     public String getName() {

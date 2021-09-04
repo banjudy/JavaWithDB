@@ -72,6 +72,7 @@ public class Dragon {
         return id + " - " +
                 uniqueName + " , " +
                 dragonText + " , " +
-                rarity;
+                rarity + "\n\t" +
+                elements;
     }
 }
