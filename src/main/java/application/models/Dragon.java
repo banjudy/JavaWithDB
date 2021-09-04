@@ -13,6 +13,12 @@ public class Dragon {
 
     private List<Element> elements;
 
+    public Dragon(String uniqueName, String dragonText, Rarity rarity) {
+        this.uniqueName = uniqueName;
+        this.dragonText = dragonText;
+        this.rarity = rarity;
+    }
+
     public Dragon(long id, String uniqueName, String dragonText, Rarity rarity) {
         this.id = id;
         this.uniqueName = uniqueName;

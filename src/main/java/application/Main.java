@@ -2,6 +2,7 @@ package application;
 
 import application.database.DBEngine;
 import application.models.Dragon;
+import application.models.Rarity;
 
 import java.sql.SQLOutput;
 import java.util.List;
@@ -17,16 +18,14 @@ public class Main {
         //System.out.println(System.getenv("DB_USER"));
         //System.out.println(System.getenv("DB_PASSWORD"));
 
-        if (engine.isConnected()) {
-            List<Dragon> dragons = engine.listAllDragons();
-
-            for (Dragon dragon : dragons) {
-                System.out.println(dragon);
-            }
-
+       if (engine.isConnected()) {
+            Dragon dragon = new Dragon("Paff", "A bűvös sárkány", Rarity.HEROIC);
+            boolean success = engine.addDragonToDB(dragon);
+           System.out.println(success);
         } else {
             System.out.println("no connection");
         }
+
 
     }
 }
