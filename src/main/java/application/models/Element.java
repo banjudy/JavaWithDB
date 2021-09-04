@@ -2,12 +2,31 @@ package application.models;
 
 public class Element {
 
-    /*CREATE TABLE IF NOT EXISTS  element (
-            element_name VARCHAR(50),
-    icon_img BLOB,
-    PRIMARY KEY (element_name) */
+    private String name;
+    private byte[] icon_img;
 
-    byte[] icon_img;
-    int keyID;
 
+    public Element() {
+    }
+
+    public Element(String name, byte[] icon_img) {
+        this.name = name;
+        this.icon_img = icon_img;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public byte[] getIcon_img() {
+        return icon_img;
+    }
+
+    public void setIcon_img(byte[] icon_img) {
+        this.icon_img = icon_img;
+    }
 }
